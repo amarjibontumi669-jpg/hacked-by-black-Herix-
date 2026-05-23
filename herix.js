@@ -147,7 +147,7 @@
             <span style="color:#ff6666;">|</span><span>[ TARGET: GOV ]</span>
         </div>
         <div class="warning-box">🛑 [!] SYSTEM COMPROMISED BY OUTLAWS [!] 🛑</div>
-        <div class="img-frame"><img src="https://i.ibb.co/4npQm04G/1000022756.png" alt="Lamisa" class="target-img"></div>
+        <div class="img-frame"><img src="https://i.ibb.co/4npQm04G/1000022756.jpg" alt="Lamisa" class="target-img"></div>
         <h1 class="hacker-main">Cyber Sentinel Bangladesh Hacked By Black Herix Agent Csb</h1>
         <div class="threat-message">
             <span class="corner-bracket corner-tl"></span><span class="corner-bracket corner-tr"></span>
