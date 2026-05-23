@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Cyber Sentinel Bangladesh Hacked By Black Herix Agent Csb</title>
+    <title>SYSTEM COMPROMISED BY BLACK HERIX</title>
     <style>
         :root {
             --blood-red: #ff0000;
@@ -147,17 +147,17 @@
             <span style="color:#ff6666;">|</span><span>[ TARGET: GOV ]</span>
         </div>
         <div class="warning-box">🛑 [!] SYSTEM COMPROMISED BY OUTLAWS [!] 🛑</div>
-        <div class="img-frame"><img src="https://i.ibb.co/4npQm04G/1000022756.jpg" alt="Lamisa" class="target-img"></div>
-        <h1 class="hacker-main">Cyber Sentinel Bangladesh Hacked By Black Herix Agent Csb</h1>
+        <div class="img-frame"><img src="https://i.ibb.co/ccrjKJh5/1000021966.jpg" alt="Lamisa" class="target-img"></div>
+        <h1 class="hacker-main">Hacked By Black Herix</h1>
         <div class="threat-message">
             <span class="corner-bracket corner-tl"></span><span class="corner-bracket corner-tr"></span>
             <span class="corner-bracket corner-bl"></span><span class="corner-bracket corner-br"></span>
             আমাদের নীরবতাকে দুর্বলতা ভাববেন না। প্রশাসন এবং সরকারের উচ্চপদস্থ কর্মকর্তাদের কান খুলে শুনে রাখা উচিত— আইন যদি নিজের গতিতে না চলে, তবে আমরা আমাদের নিজস্ব গতিতে বিচার করতে বাধ্য হবো। ডিজিটাল দেয়াল ভেঙে গুঁড়িয়ে দেওয়া কেবল আমাদের ক্ষমতার একটা ছোট ট্রেইলার মাত্র।
         </div>
         <div class="slogan-zone">
-            <p class="demand-text">🛑 রামিসা হত্যার সঠিক বিচার চাই 🛑</p>
-            <p class="demand-text">🛑 রামিসা হত্যার সঠিক বিচার চাই 🛑</p>
-            <p class="demand-text">🛑 রামিসা হত্যার সঠিক বিচার চাই 🛑</p>
+            <p class="demand-text">🛑 লামিসা হত্যার সঠিক বিচার চাই 🛑</p>
+            <p class="demand-text">🛑 লামিসা হত্যার সঠিক বিচার চাই 🛑</p>
+            <p class="demand-text">🛑 লামিসা হত্যার সঠিক বিচার চাই 🛑</p>
         </div>
         <div class="ultimatum">অবিলম্বে লামিসা হত্যার সুষ্ঠু ও প্রকাশ্য বিচার নিশ্চিত করা না হয়, তবে পরবর্তী সাইবার হামলা হবে আরও ভয়াবহ। জাস্ট ওয়েট অ্যান্ড ওয়াচ!</div>
         <p class="click-notice">[ সাইটের যেকোনো জায়গায় ক্লিক করলে অডিও চালু হবে ]</p>
